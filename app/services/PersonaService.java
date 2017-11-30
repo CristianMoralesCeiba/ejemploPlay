@@ -8,17 +8,17 @@ import javax.inject.Singleton;
 import domain.Persona;
 import domain.PersonaRepository;
 
-///@Singleton
+@Singleton
 public class PersonaService {
 	
     private final PersonaRepository personRepository;
 	
-    //@Inject
+    @Inject
     public PersonaService(PersonaRepository personRepository) {
         this.personRepository = personRepository;
     }
     
-	public CompletionStage<Persona> crearPersona(Persona persona) {
+	public CompletionStage<Persona> crear(Persona persona) {
         return personRepository.add(persona).thenApplyAsync(p -> {
             return p;
         });

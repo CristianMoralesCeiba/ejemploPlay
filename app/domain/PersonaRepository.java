@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 public interface PersonaRepository {
 
     CompletionStage<Persona> add(Persona person);
+    
+    
 
     CompletionStage<Stream<Persona>> list();
 }

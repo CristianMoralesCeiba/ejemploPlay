@@ -43,6 +43,11 @@ public class JPAPersonaRepository implements PersonaRepository {
         em.persist(person);
         return person;
     }
+    
+    private String delete(EntityManager em, String person) {
+        em.persist(person);
+        return person;
+    }
 
     private Stream<Persona> list(EntityManager em) {
         List<Persona> persons = em.createQuery("select p from Person p", Persona.class).getResultList();

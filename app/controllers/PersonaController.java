@@ -13,17 +13,18 @@ import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import services.PersonaService;
 
 
 public class PersonaController extends Controller{
 
     private final HttpExecutionContext ec;
-    private final PersonaRepository personaRepository;
+    private final PersonaService personaService;
 	
     @Inject
-    public PersonaController(HttpExecutionContext ec, PersonaRepository personaRepository) {
+    public PersonaController(HttpExecutionContext ec, PersonaService personaService) {
         this.ec = ec;
-        this.personaRepository = personaRepository;
+        this.personaService = personaService;
     }
     
 
@@ -31,7 +32,7 @@ public class PersonaController extends Controller{
     public CompletionStage<Result> addPerson() {
 		JsonNode body = request().body().asJson();
 		Persona persona = Json.fromJson(body, Persona.class);
-        return personaRepository.add(persona).thenApplyAsync(p -> {
+        return personaService.crear(persona).thenApplyAsync(p -> {
             return created(Json.toJson(p));
         }, ec.current());
     }
