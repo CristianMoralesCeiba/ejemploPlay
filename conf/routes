@@ -1,8 +1,11 @@
 
 GET     /persona                   controllers.PersonaController.listar
 
+
 GET     /persona/:cedula               controllers.PersonaController.buscar(cedula: String)
+
 
 DELETE  /persona/:cedula               controllers.PersonaController.borrar(cedula: String)
 
-POST    /persona             	   controllers.PersonaController.crear
++nocsrf
+POST    /persona             	   controllers.PersonaController.addPerson()

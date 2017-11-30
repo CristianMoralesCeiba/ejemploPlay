@@ -1,9 +1,16 @@
 package domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Persona {
 
+	@Id
+	@Column(name="Id")
 	private String cedula;
+	@Column(name="Nombre")
 	private String nombre;
+	@Column(name="Apellidos")
 	private String apellidos;
 
 	public String getCedula() {
