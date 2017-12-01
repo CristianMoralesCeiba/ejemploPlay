@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import domain.Persona;
-import domain.PersonaRepository;
 import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.BodyParser;
@@ -29,7 +28,7 @@ public class PersonaController extends Controller{
     
 
 	@BodyParser.Of(BodyParser.Json.class)
-    public CompletionStage<Result> addPerson() {
+    public CompletionStage<Result> crear() {
 		JsonNode body = request().body().asJson();
 		Persona persona = Json.fromJson(body, Persona.class);
         return personaService.crear(persona).thenApplyAsync(p -> {
@@ -37,20 +36,8 @@ public class PersonaController extends Controller{
         }, ec.current());
     }
     
-    
-    public Result index() {
-        return ok("hola");
-    }
-    
 	
-	@BodyParser.Of(BodyParser.Json.class)
-	public Result crear () {
-		
-		
-		return ok("Se creo");
-	}
-	
-	public Result listar (){return null;}
+	public CompletionStage<Result> listar (){return null;}
 	public Result buscar (String cedula){return null;}
 	public Result borrar (String cedula){return null;}
 	

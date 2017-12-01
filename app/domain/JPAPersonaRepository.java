@@ -18,6 +18,8 @@ public class JPAPersonaRepository implements PersonaRepository {
 
     private final JPAApi jpaApi;
     private final DatabaseExecutionContext executionContext;
+    private final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger("application");
+
 
     @Inject
     public JPAPersonaRepository(JPAApi jpaApi, DatabaseExecutionContext executionContext) {
@@ -27,6 +29,7 @@ public class JPAPersonaRepository implements PersonaRepository {
 
     @Override
     public CompletionStage<Persona> add(Persona person) {
+    	logger.info("repo " + Thread.currentThread().getId());
         return supplyAsync(() -> wrap(em -> insert(em, person)), executionContext);
     }
 
